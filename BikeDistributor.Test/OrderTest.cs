@@ -26,19 +26,6 @@ Total: {4:C}", make, model, cost,tax,total);
 
             order.Receipt().Should().Be(expected);
         }
-
-        private const string ResultStatementOneElite = @"Order Receipt for Anywhere Bike Shop
-	1 x Specialized Venge Elite = $2,000.00
-Sub-Total: $2,000.00
-Tax: $145.00
-Total: $2,145.00";
-
-        private const string ResultStatementOneDuraAce = @"Order Receipt for Anywhere Bike Shop
-	1 x Specialized S-Works Venge Dura-Ace = $5,000.00
-Sub-Total: $5,000.00
-Tax: $362.50
-Total: $5,362.50";
-
         [Test]
         public void HtmlReceiptOneDefy()
         {
