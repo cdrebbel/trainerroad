@@ -6,6 +6,7 @@ namespace BikeDistributor.Test
     [TestFixture]
     public class OrderTest
     {
+        //TODO: Mock CalculateCost and inject into new Line()
         private readonly static string CompanyName = "Anywhere Bike Shop";
         private const decimal TaxRate = .0725m;
         private Order _order;
@@ -45,18 +46,6 @@ Total: {4:C}";
 
             var expected = string.Format(HtmlReceiptTemplate,make, model, cost, tax, total,CompanyName);
             _order.HtmlReceipt().Should().Be(expected);
-        }
-
-        [TestCase(1000, 1, 1000)]
-        [TestCase(1000, 100,90000)]
-        [TestCase(2000, 1, 2000)]
-        [TestCase(2000, 100, 160000)]
-        [TestCase(5000, 1, 5000)]
-        [TestCase(5000, 100, 400000)]
-        public void CostIsCalculated(decimal price, int quantity, decimal expected)
-        {
-            var cost = _order.CalculateCost(quantity, price);
-            cost.Should().Be(expected);
         }
     }
 }

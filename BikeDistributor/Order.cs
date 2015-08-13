@@ -29,7 +29,7 @@ namespace BikeDistributor
             var result = new StringBuilder(string.Format("Order Receipt for {0}{1}", Company, Environment.NewLine));
             foreach (var line in _lines)
             {
-                var thisAmount = CalculateCost(line.Quantity, line.Price);
+                var thisAmount = line.Cost;
                 result.AppendLine(string.Format("\t{0} x {1} {2} = {3}", line.Quantity, line.Brand, line.Model, thisAmount.ToString("C")));
                 totalAmount += thisAmount;
             }
@@ -49,7 +49,7 @@ namespace BikeDistributor
                 result.Append("<ul>");
                 foreach (var line in _lines)
                 {
-                    var thisAmount = CalculateCost(line.Quantity, line.Price);
+                    var thisAmount = line.Cost;
 
                     result.Append(string.Format("<li>{0} x {1} {2} = {3}</li>", line.Quantity, line.Brand, line.Model, thisAmount.ToString("C")));
                     totalAmount += thisAmount;
@@ -64,35 +64,5 @@ namespace BikeDistributor
             result.Append("</body></html>");
             return result.ToString();
         }
-
-        public decimal CalculateCost(int quantity, decimal price)
-        {
-            var discount = 1m;
-
-            if (price >= 5000)
-            {
-                if (quantity >= 5)
-                {
-                    discount = .8m;
-                }
-            }
-            else if (price >= 2000)
-            {
-                if (quantity >= 10)
-                {
-                    discount = .8m;
-                }
-            }
-            else if (price >= 1000)
-            {
-                if (quantity >= 20)
-                {
-                    discount = .9m;
-                }
-            }
-
-            return quantity * price * discount;
-        }
-
     }
 }
