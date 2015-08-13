@@ -9,3 +9,9 @@ C:\code\bikeDistributor\BikeDistributor\bin\Debug\nunit.core.dll
 C:\code\bikeDistributor\BikeDistributor\bin\Debug\nunit.core.interfaces.dll
 C:\code\bikeDistributor\BikeDistributor\bin\Debug\nunit.util.dll
 C:\code\bikeDistributor\BikeDistributor\bin\Debug\NUnit.VisualStudio.TestAdapter.dll
+C:\code\bikeDistributor\BikeDistributor\bin\Debug\FluentAssertions.Core.dll
+C:\code\bikeDistributor\BikeDistributor\bin\Debug\FluentAssertions.dll
+C:\code\bikeDistributor\BikeDistributor\bin\Debug\FluentAssertions.pdb
+C:\code\bikeDistributor\BikeDistributor\bin\Debug\FluentAssertions.xml
+C:\code\bikeDistributor\BikeDistributor\bin\Debug\FluentAssertions.Core.pdb
+C:\code\bikeDistributor\BikeDistributor\bin\Debug\FluentAssertions.Core.xml
