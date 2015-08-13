@@ -4,11 +4,15 @@
     {
         public Line(Bike bike, int quantity)
         {
-            Bike = bike;
+            Brand = bike.Brand;
+            Model = bike.Model;
+            Price = bike.Price;
             Quantity = quantity;
         }
 
-        public Bike Bike { get; private set; }
+        public string Brand { get; private set; }
+        public string Model { get; private set; }
+        public decimal Price { get; private set; }
         public int Quantity { get; private set; }
     }
 }

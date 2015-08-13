@@ -18,7 +18,6 @@ namespace BikeDistributor
             TaxRate = taxRate;
         }
 
-
         public void AddLine(Line line)
         {
             _lines.Add(line);
@@ -30,8 +29,8 @@ namespace BikeDistributor
             var result = new StringBuilder(string.Format("Order Receipt for {0}{1}", Company, Environment.NewLine));
             foreach (var line in _lines)
             {
-                var thisAmount = CalculateCost(line.Quantity, line.Bike.Price);
-                result.AppendLine(string.Format("\t{0} x {1} {2} = {3}", line.Quantity, line.Bike.Brand, line.Bike.Model, thisAmount.ToString("C")));
+                var thisAmount = CalculateCost(line.Quantity, line.Price);
+                result.AppendLine(string.Format("\t{0} x {1} {2} = {3}", line.Quantity, line.Brand, line.Model, thisAmount.ToString("C")));
                 totalAmount += thisAmount;
             }
             result.AppendLine(string.Format("Sub-Total: {0}", totalAmount.ToString("C")));
@@ -50,13 +49,14 @@ namespace BikeDistributor
                 result.Append("<ul>");
                 foreach (var line in _lines)
                 {
-                    var thisAmount = CalculateCost(line.Quantity, line.Bike.Price);
+                    var thisAmount = CalculateCost(line.Quantity, line.Price);
 
-                    result.Append(string.Format("<li>{0} x {1} {2} = {3}</li>", line.Quantity, line.Bike.Brand, line.Bike.Model, thisAmount.ToString("C")));
+                    result.Append(string.Format("<li>{0} x {1} {2} = {3}</li>", line.Quantity, line.Brand, line.Model, thisAmount.ToString("C")));
                     totalAmount += thisAmount;
                 }
                 result.Append("</ul>");
             }
+
             result.Append(string.Format("<h3>Sub-Total: {0}</h3>", totalAmount.ToString("C")));
             var tax = totalAmount * TaxRate;
             result.Append(string.Format("<h3>Tax: {0}</h3>", tax.ToString("C")));
@@ -76,12 +76,15 @@ namespace BikeDistributor
                     discount = .8m;
                 }
             }
-            else if (price >= 2000) {
-                if (quantity >= 10) {
+            else if (price >= 2000)
+            {
+                if (quantity >= 10)
+                {
                     discount = .8m;
                 }
             }
-            else if (price >= 1000) {
+            else if (price >= 1000)
+            {
                 if (quantity >= 20)
                 {
                     discount = .9m;
