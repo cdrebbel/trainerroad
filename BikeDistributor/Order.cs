@@ -7,15 +7,17 @@ namespace BikeDistributor
 {
     public class Order
     {
-        private const double TaxRate = .0725d;
         private readonly IList<Line> _lines = new List<Line>();
 
-        public Order(string company)
+        public string Company { get; private set; }
+        public double TaxRate { get; private set; }
+
+        public Order(string company, double taxRate)
         {
             Company = company;
+            TaxRate = taxRate;
         }
 
-        public string Company { get; private set; }
 
         public void AddLine(Line line)
         {
