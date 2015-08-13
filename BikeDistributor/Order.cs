@@ -10,9 +10,9 @@ namespace BikeDistributor
         private readonly IList<Line> _lines = new List<Line>();
 
         public string Company { get; private set; }
-        public double TaxRate { get; private set; }
+        public decimal TaxRate { get; private set; }
 
-        public Order(string company, double taxRate)
+        public Order(string company, decimal taxRate)
         {
             Company = company;
             TaxRate = taxRate;
@@ -26,7 +26,7 @@ namespace BikeDistributor
 
         public string Receipt()
         {
-            var totalAmount = 0d;
+            var totalAmount = 0m;
             var result = new StringBuilder(string.Format("Order Receipt for {0}{1}", Company, Environment.NewLine));
             foreach (var line in _lines)
             {
@@ -43,7 +43,7 @@ namespace BikeDistributor
 
         public string HtmlReceipt()
         {
-            var totalAmount = 0d;
+            var totalAmount = 0m;
             var result = new StringBuilder(string.Format("<html><body><h1>Order Receipt for {0}</h1>", Company));
             if (_lines.Any())
             {
@@ -65,23 +65,27 @@ namespace BikeDistributor
             return result.ToString();
         }
 
-        public double CalculateCost(int quantity, int price)
+        public decimal CalculateCost(int quantity, decimal price)
         {
-            var discount = 1d;
-            switch (price)
+            var discount = 1m;
+
+            if (price >= 5000)
             {
-                case Bike.OneThousand:
-                    if (quantity >= 20)
-                        discount = .9d;
-                    break;
-                case Bike.TwoThousand:
-                    if (quantity >= 10)
-                        discount = .8d;
-                    break;
-                case Bike.FiveThousand:
-                    if (quantity >= 5)
-                        discount = .8d;
-                    break;
+                if (quantity >= 5)
+                {
+                    discount = .8m;
+                }
+            }
+            else if (price >= 2000) {
+                if (quantity >= 10) {
+                    discount = .8m;
+                }
+            }
+            else if (price >= 1000) {
+                if (quantity >= 20)
+                {
+                    discount = .9m;
+                }
             }
 
             return quantity * price * discount;
