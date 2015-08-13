@@ -36,7 +36,21 @@ Total: {4:C}";
             order.AddLine(new Line(bike, 1));
             var expected = string.Format(HtmlReceiptTemplate,make, model, cost, tax, total,CompanyName);
             order.HtmlReceipt().Should().Be(expected);
-        }}
+        }
+
+        [TestCase(Bike.OneThousand,1,1000)]
+        [TestCase(Bike.OneThousand,100,90000)]
+        [TestCase(Bike.TwoThousand, 1, 2000)]
+        [TestCase(Bike.TwoThousand, 100, 160000)]
+        [TestCase(Bike.FiveThousand, 1, 5000)]
+        [TestCase(Bike.FiveThousand, 100, 400000)]
+        public void CostIsCalculated(int price, int quantity, double expected)
+        {
+            var order = new Order(CompanyName);
+            var cost = order.CalculateCost(quantity, price);
+            cost.Should().Be(expected);
+        }
+    }
 }
 
 

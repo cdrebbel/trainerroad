@@ -28,28 +28,7 @@ namespace BikeDistributor
             var result = new StringBuilder(string.Format("Order Receipt for {0}{1}", Company, Environment.NewLine));
             foreach (var line in _lines)
             {
-                var thisAmount = 0d;
-                switch (line.Bike.Price)
-                {
-                    case Bike.OneThousand:
-                        if (line.Quantity >= 20)
-                            thisAmount += line.Quantity * line.Bike.Price * .9d;
-                        else
-                            thisAmount += line.Quantity * line.Bike.Price;
-                        break;
-                    case Bike.TwoThousand:
-                        if (line.Quantity >= 10)
-                            thisAmount += line.Quantity * line.Bike.Price * .8d;
-                        else
-                            thisAmount += line.Quantity * line.Bike.Price;
-                        break;
-                    case Bike.FiveThousand:
-                        if (line.Quantity >= 5)
-                            thisAmount += line.Quantity * line.Bike.Price * .8d;
-                        else
-                            thisAmount += line.Quantity * line.Bike.Price;
-                        break;
-                }
+                var thisAmount = CalculateCost(line.Quantity, line.Bike.Price);
                 result.AppendLine(string.Format("\t{0} x {1} {2} = {3}", line.Quantity, line.Bike.Brand, line.Bike.Model, thisAmount.ToString("C")));
                 totalAmount += thisAmount;
             }
@@ -69,28 +48,8 @@ namespace BikeDistributor
                 result.Append("<ul>");
                 foreach (var line in _lines)
                 {
-                    var thisAmount = 0d;
-                    switch (line.Bike.Price)
-                    {
-                        case Bike.OneThousand:
-                            if (line.Quantity >= 20)
-                                thisAmount += line.Quantity*line.Bike.Price*.9d;
-                            else
-                                thisAmount += line.Quantity*line.Bike.Price;
-                            break;
-                        case Bike.TwoThousand:
-                            if (line.Quantity >= 10)
-                                thisAmount += line.Quantity*line.Bike.Price*.8d;
-                            else
-                                thisAmount += line.Quantity*line.Bike.Price;
-                            break;
-                        case Bike.FiveThousand:
-                            if (line.Quantity >= 5)
-                                thisAmount += line.Quantity*line.Bike.Price*.8d;
-                            else
-                                thisAmount += line.Quantity*line.Bike.Price;
-                            break;
-                    }
+                    var thisAmount = CalculateCost(line.Quantity, line.Bike.Price);
+
                     result.Append(string.Format("<li>{0} x {1} {2} = {3}</li>", line.Quantity, line.Bike.Brand, line.Bike.Model, thisAmount.ToString("C")));
                     totalAmount += thisAmount;
                 }
@@ -102,6 +61,28 @@ namespace BikeDistributor
             result.Append(string.Format("<h2>Total: {0}</h2>", (totalAmount + tax).ToString("C")));
             result.Append("</body></html>");
             return result.ToString();
+        }
+
+        public double CalculateCost(int quantity, int price)
+        {
+            var discount = 1d;
+            switch (price)
+            {
+                case Bike.OneThousand:
+                    if (quantity >= 20)
+                        discount = .9d;
+                    break;
+                case Bike.TwoThousand:
+                    if (quantity >= 10)
+                        discount = .8d;
+                    break;
+                case Bike.FiveThousand:
+                    if (quantity >= 5)
+                        discount = .8d;
+                    break;
+            }
+
+            return quantity * price * discount;
         }
 
     }
