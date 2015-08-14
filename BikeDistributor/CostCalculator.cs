@@ -1,38 +1,42 @@
-﻿namespace BikeDistributor
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace BikeDistributor
 {
     public interface ICostCalculator
     {
         decimal CalculateCost(int quantity, decimal price);
     }
 
+    public class DiscountTier
+    {
+        public decimal Price;
+        public int Quantity;
+        public decimal Discount;
+    }
+
     public class CostCalculator : ICostCalculator
     {
+        //TODO: Move this out elsewhere so that CostCalculator doesn't care about it.
+        private List<DiscountTier> _discountTiers = new List<DiscountTier>()
+        {
+            new DiscountTier {Price = 5000m, Quantity = 5, Discount = .8m },
+            new DiscountTier {Price = 2000m, Quantity = 10, Discount = .8m },
+            new DiscountTier {Price = 1000m, Quantity = 20, Discount = .9m }
+        };
+
         public decimal CalculateCost(int quantity, decimal price)
         {
             var discount = 1m;
 
-            if (price >= 5000)
+            foreach (var discountTier in _discountTiers.OrderByDescending(dt => dt.Price))
             {
-                if (quantity >= 5)
+                if(price >= discountTier.Price && quantity >= discountTier.Quantity)
                 {
-                    discount = .8m;
+                    discount = discountTier.Discount;
+                    break;
                 }
             }
-            else if (price >= 2000)
-            {
-                if (quantity >= 10)
-                {
-                    discount = .8m;
-                }
-            }
-            else if (price >= 1000)
-            {
-                if (quantity >= 20)
-                {
-                    discount = .9m;
-                }
-            }
-
             return quantity * price * discount;
         }
     }
