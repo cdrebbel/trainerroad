@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace BikeDistributor
-{
-
+{ 
     public interface IReceiptBuilder
     {
         string BuildReceipt(IList<Line> lines, decimal taxRate, string company, ReceiptTemplateType template);

@@ -7,7 +7,6 @@
 
     public class CostCalculator : ICostCalculator
     {
-
         public decimal CalculateCost(int quantity, decimal price)
         {
             var discount = 1m;
