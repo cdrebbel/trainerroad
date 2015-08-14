@@ -29,12 +29,12 @@ namespace BikeDistributor
 
         public string Receipt()
         {
-            return _receiptBuilder.BuildReceipt(_lines, TaxRate, Company);
+            return _receiptBuilder.BuildReceipt(_lines, TaxRate, Company, ReceiptTemplateType.Basic);
         }
 
         public string HtmlReceipt()
         {
-            return _receiptBuilder.BuildHtmlReceipt(_lines, TaxRate, Company);
+            return _receiptBuilder.BuildReceipt(_lines, TaxRate, Company, ReceiptTemplateType.Html);
         }
     }
 }

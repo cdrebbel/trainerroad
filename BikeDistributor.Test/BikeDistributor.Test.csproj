@@ -81,7 +81,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CostCalculatorTests.cs" />
-    <Compile Include="OrderTest.cs" />
+    <Compile Include="ReceiptBuilderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
