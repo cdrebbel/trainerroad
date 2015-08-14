@@ -29,7 +29,7 @@ namespace BikeDistributor
             var tax = subTotal * taxRate;
             var totalAmount = subTotal + tax;
 
-            var result = new StringBuilder(string.Format(template.Template, company, lineItems, totalAmount, tax, totalAmount, Environment.NewLine));
+            var result = new StringBuilder(string.Format(template.Template, company, lineItems, totalAmount, tax, totalAmount));
 
             return result.ToString();
         }

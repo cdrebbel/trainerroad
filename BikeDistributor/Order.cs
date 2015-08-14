@@ -27,6 +27,7 @@ namespace BikeDistributor
             _lines.Add(line);
         }
 
+        //Maybe there should be unit tests? There is no logic. Order be dumb now. 
         public string Receipt()
         {
             return _receiptBuilder.BuildReceipt(_lines, TaxRate, Company, ReceiptTemplateType.Basic);

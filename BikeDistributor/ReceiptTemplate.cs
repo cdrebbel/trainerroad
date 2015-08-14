@@ -8,7 +8,7 @@ namespace BikeDistributor
         Html = 2
     }
 
-    public class ReceiptTemplate
+    public class ReceiptTemplate //This could be renamed, template.Template is a little silly.
     {
         public bool AppendsNewLine { get; set; }
         public string LineItemFormat { get; set; }
